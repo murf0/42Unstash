@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Unstash {
+	private static String stashFile;
 	private byte[] bytes = new byte[0];
 
 	private void readfile(String filename) {
@@ -52,7 +53,7 @@ public class Unstash {
 
 			if (b == 0)
 				break; // continue until 0 found
-			System.err.print(b + " ");
+			//System.err.print(b + " ");
 			System.out.print((char) b);
 		}
 		System.out.println();
@@ -60,17 +61,15 @@ public class Unstash {
 
 	public static void main(String[] args) {
 		if (args.length == 0) {
-			System.out.println("\nunstash IBM keyDB passwords, version 1.0");
-			System.out
-					.println("\nby Jeroen Zomer (jeroen.zomer@axxius.nl) (2009)");
-			System.out
-					.println("based on  Ben Laurie's (in)famous PERL script (1999)");
-			System.out.println("\nusage:\n");
-			System.out.println(" java -jar unstash.jar <stashfile>.sth");
-			System.exit(1);
+			System.out.println("\nunstash IBM keyDB passwords, version 1.0.1");
+			System.out.println("\nby Jeroen Zomer (jeroen.zomer@axxius.nl) (2009)");
+			System.out.println("based on  Ben Laurie's (in)famous PERL script (1999)");
+			stashFile="key.sth";
+		} else {
+			stashFile=args[0];
 		}
 		Unstash worker = new Unstash();
-		worker.readfile(args[0]);
+		worker.readfile(stashFile);
 		worker.unstash();
 	}
 
